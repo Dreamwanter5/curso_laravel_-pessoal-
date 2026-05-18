@@ -1,0 +1,44 @@
+services:
+  cursolaravel:
+    build: .
+    container_name: cursolaravel
+    ports:
+      - "8000:80"
+    depends_on:
+      - mariadb
+    networks:
+      - cursolaravel-network
+    volumes:
+      - ./:/var/www/html
+    environment:
+      HOME: /tmp
+    user: "${UID:-1000}:${GID:-1000}"
+
+  mariadb:
+    image: mariadb:11
+    container_name: cursolaravel_mariadb
+    restart: always
+    environment:
+      MYSQL_DATABASE: cursolaravel
+      MYSQL_USER: cursolaravel
+      MYSQL_PASSWORD: cursolaravel
+      MYSQL_ROOT_PASSWORD: cursolaravel
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - cursolaravel-network
+
+  selenium:
+    image: selenium/standalone-chrome
+    container_name: cursolaravel_selenium
+    ports:
+      - "7900:7900"
+    networks:
+      - cursolaravel-network
+    shm_size: 2gb
+
+networks:
+  cursolaravel-network:
+
+volumes:
+  mariadb_data:
