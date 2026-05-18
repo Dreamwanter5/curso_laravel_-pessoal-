@@ -12,7 +12,8 @@
 
 	<ul>
 	    @foreach($livros as $livro)
-	        <li>{{ $livro->titulo }}, por <i>{{ $livro->autor }}</i> em {{ $livro->ano }}</li>
+	        <li><a href="/livros/{{ $livro->id }}" >{{ $livro->titulo }}</a>, por <i>{{ $livro->autor }}</i> em {{ $livro->ano }}</li>
 	    @endforeach
 	</ul>
+	<a href="/livros/create" style="display: inline-block; margin-top: 10px;">Adicionar Livro</a>
 </html>
