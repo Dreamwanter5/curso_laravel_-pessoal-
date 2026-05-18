@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\Livro;
+use Illuminate\Console\Command;
+use League\Csv\Reader;
+
 
 class ImportaLivros extends Command
 {
@@ -17,32 +19,26 @@ class ImportaLivros extends Command
         Livro::truncate();
 
         $caminho = base_path('livros.csv');
-        $arquivo = fopen($caminho, 'r'); //"r" - read ou leitura, assim ele lê o csv.
-        // Verificação
-        if ($arquivo === false) {
+        if (! is_readable($caminho)) {
             $this->error('Não foi possível abrir o arquivo CSV.');
 
             return Command::FAILURE;
         }
+
+        $csv = Reader::createFromPath($caminho, 'r'); // O Reader por si só já é capaz de ler o arquivo CSV, e o 'r' indica que é para leitura.
+        $csv->setHeaderOffset(0);
         
         $importados = 0;
-
-        fgetcsv($arquivo); // Ignora a primeira linha do CSV 
-
-        //o fgetcsv lê as linhas do arquivo csv, separando-os pela vírgula.
-
-        while (($linha = fgetcsv($arquivo)) !== false) {
-
+        // o getRecords() é um método do League\Csv\Reader que retorna um iterador para percorrer as linhas do CSV, e cada linha é representada como um array associativo onde as chaves são os nomes das colunas (definidos pelo setHeaderOffset(0)).
+        foreach ($csv->getRecords() as $linha) {
             $livro = new Livro();
-            $livro->titulo = ($linha[0]);
-            $livro->autor = ($linha[1]);
-            $livro->ano = (int) ($linha[2]);
+            $livro->titulo = $linha['titulo'];
+            $livro->autor = $linha['autor'];
+            $livro->ano = (int) $linha['ano'];
             $livro->save();
 
             $importados++;
         }
-
-        fclose($arquivo);
 
         $this->info("{$importados} livros importados com sucesso!");
         
