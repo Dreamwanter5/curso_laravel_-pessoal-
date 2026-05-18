@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\EstatisticaController;
+use App\Http\Controllers\FraseController;
 //Adicionei o EstatisticaController para a criação da rota
 
 Route::get('/', function () {
@@ -26,3 +27,23 @@ Route::patch('/livros/{livro}', [LivroController::class,'update']);
 
 # DELETE
 Route::delete('/livros/{livro}', [LivroController::class,'destroy']);
+
+//Frases CRUD
+# CREATE
+Route::get('/frases/create', [FraseController::class,'create']);
+Route::post('/frases', [FraseController::class,'store']);
+
+// Frase do dia (aleatória, por dia da semana)
+Route::get('/frasedodia', [FraseController::class, 'fraseDoDia']);
+
+# READ
+Route::get('/frases', [FraseController::class,'index']);
+Route::get('/frases/{frase}', [FraseController::class,'show']);
+
+# UPDATE
+Route::get('/frases/{frase}/edit', [FraseController::class,'edit']);
+Route::patch('/frases/{frase}', [FraseController::class,'update']);
+
+# DELETE
+Route::delete('/frases/{frase}', [FraseController::class,'destroy']);
+
