@@ -1,23 +1,31 @@
-<!DOCTYPE html>
-<html lang="PT-BR">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel Frases</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Frase</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Frase do dia</h1>
-    <p><strong>{{ $frase->dia_semana }}</strong></p>
-    <p>{{ $frase->texto }}</p>
+<body class="bg-light">
+<div class="container py-4">
+    <h1 class="h4">Frase do dia</h1>
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ $frase->dia_semana }}</h5>
+            <p class="card-text">{{ $frase->texto }}</p>
+            <a href="/frases/{{ $frase->id }}/edit" class="btn btn-sm btn-outline-primary me-2">Editar</a>
+            <form method="POST" action="/frases/{{ $frase->id }}" style="display:inline">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-sm btn-outline-danger" type="submit" onclick="return confirm('Tem certeza que deseja apagar esta frase?')">Apagar</button>
+            </form>
+        </div>
+    </div>
 
-    <a href="/frases/{{ $frase->id }}/edit">Editar</a><br>
-
-    <form method="POST" action="/frases/{{ $frase->id }}" style="display: inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" onclick="return confirm('Tem certeza que deseja apagar esta frase?')">Apagar</button>
-    </form>
-    <br>
-    <a href="/frases">Voltar para a lista de frases</a>
+    <div class="mt-3">
+        <a href="/frases" class="link-secondary">Voltar para a lista de frases</a>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
