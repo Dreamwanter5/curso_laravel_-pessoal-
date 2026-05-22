@@ -8,6 +8,7 @@
 </head>
 <body class="bg-light">
 <div class="container py-4">
+    <!-- View específico de cada frase, método show -->
     <h1 class="h4">Frase do dia</h1>
     <div class="card mt-3">
         <div class="card-body">

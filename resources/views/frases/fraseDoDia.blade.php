@@ -10,7 +10,7 @@
 <body class="bg-light">
 <div class="container py-4">
 	<h1 class="h4">Frase do Dia - {{ $dia }} </h1>
-
+	<!-- Verificação simples. -->
 	@if($frase)
 		<div class="card mt-3">
 			<div class="card-body">
