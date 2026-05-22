@@ -32,12 +32,12 @@ class LivroController extends Controller
     }
 
     public function store(Request $request){
-    $livro = new Livro;
-    $livro->titulo = $request->titulo;
-    $livro->autor = $request->autor;
-    $livro->ano = $request->ano;
-    $livro->save();
-    return redirect('/livros');
+        $livro = new Livro;
+        $livro->titulo = $request->titulo;
+        $livro->autor = $request->autor;
+        $livro->ano = $request->ano;
+        $livro->save();
+        return redirect('/livros');
     }
 
     public function edit(Livro $livro){

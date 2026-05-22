@@ -60,11 +60,11 @@ class FraseController extends Controller
     }
 
     public function store(Request $request){
-    $frase = new Frase;
-    $frase->dia_semana = $request->dia_semana;
-    $frase->texto = $request->texto;
-    $frase->save();
-    return redirect('/frases');
+        $frase = new Frase;
+        $frase->dia_semana = $request->dia_semana;
+        $frase->texto = $request->texto;
+        $frase->save();
+        return redirect('/frases');
     }
 
     public function edit(Frase $frase){
