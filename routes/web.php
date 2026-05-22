@@ -33,9 +33,6 @@ Route::delete('/livros/{livro}', [LivroController::class,'destroy']);
 Route::get('/frases/create', [FraseController::class,'create']);
 Route::post('/frases', [FraseController::class,'store']);
 
-// Frase do dia (aleatória, por dia da semana)
-Route::get('/frasedodia', [FraseController::class, 'fraseDoDia']);
-
 # READ
 Route::get('/frases', [FraseController::class,'index']);
 Route::get('/frases/{frase}', [FraseController::class,'show']);
@@ -46,4 +43,7 @@ Route::patch('/frases/{frase}', [FraseController::class,'update']);
 
 # DELETE
 Route::delete('/frases/{frase}', [FraseController::class,'destroy']);
+
+// Frase do dia (aleatória, por dia da semana)
+Route::get('/frasedodia', [FraseController::class, 'fraseDoDia']);
 
