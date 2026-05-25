@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Livro;
+use App\Http\Requests\LivroRequest;
 
 class LivroController extends Controller
 {
@@ -31,11 +32,18 @@ class LivroController extends Controller
         return view('livros.create');
     }
 
-    public function store(Request $request){
+    public function store(LivroRequest $request){
+        $request->validate([
+            'titulo' => 'required',
+            'autor' => 'required',
+            'ano' => 'required|integer',
+        ]);
+
         $livro = new Livro;
         $livro->titulo = $request->titulo;
         $livro->autor = $request->autor;
         $livro->ano = $request->ano;
+        $livro->user_id = auth()->user()->id; // Atribui o ID do usuário autenticado ao campo user_id do livro, é a concretização da alteração.
         $livro->save();
         return redirect('/livros');
     }
@@ -47,7 +55,13 @@ class LivroController extends Controller
     }
 
     // Digitar Request $request é uma forma de dizer que Request é uma variável do láravel e $request é o nome da variável, e o Livro $livro é a variável do livro que eu quero atualizar.
-    public function update(Request $request, Livro $livro){
+    public function update(LivroRequest $request, Livro $livro){
+        $request->validate([
+            'titulo' => 'required',
+            'autor' => 'required',
+            'ano' => 'required|integer',
+        ]);
+
         $livro->titulo = $request->titulo;
         $livro->autor = $request->autor;
         $livro->ano = $request->ano;

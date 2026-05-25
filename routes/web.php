@@ -2,13 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LivroController;
+//Adicionei o EstatisticaController para a criação da rota
 use App\Http\Controllers\EstatisticaController;
 use App\Http\Controllers\FraseController;
-//Adicionei o EstatisticaController para a criação da rota
+use App\Http\Controllers\IndexController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+# Dia 3 
+Route::get('/', [IndexController::class, 'index']);
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 # CREATE
 Route::post('/livros', [LivroController::class,'store']);
@@ -17,8 +21,8 @@ Route::get('/livros/create', [LivroController::class,'create']);
 # READ
 # get - é um método para LER
 Route::get('/livros', [LivroController::class,'index']);
-Route::get('/livros/{livro}', [LivroController::class,'show']);
 Route::get('/livros/stats', [EstatisticaController::class, 'stats']);
+Route::get('/livros/{livro}', [LivroController::class,'show']);
 
 # UPDATE
 // No laravel há diversos tipos de update, por isso é necessário especificar o tipo de update, e nesse caso é o patch. Que serve para atualizar apenas o campo que desejo alterar.

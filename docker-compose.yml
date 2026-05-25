@@ -28,6 +28,18 @@ services:
     networks:
       - cursolaravel-network
 
+  senhaunica-faker:
+    image: uspdev/senhaunica-faker
+    container_name: cursolaravel_senhaunica-faker
+    ports:
+      - "3141:3141"
+    environment:
+          - APP_URL=http://auth.local:3141
+    networks:
+      cursolaravel-network:
+        aliases:
+          - auth.local
+
   selenium:
     image: selenium/standalone-chrome
     container_name: cursolaravel_selenium
@@ -36,7 +48,7 @@ services:
     networks:
       - cursolaravel-network
     shm_size: 2gb
-
+  
 networks:
   cursolaravel-network:
 
