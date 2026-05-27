@@ -13,6 +13,9 @@
                     @method('DELETE')
                     <button class="btn btn-sm btn-outline-danger" type="submit" onclick="return confirm('Tem certeza que deseja apagar esta frase?')">Apagar</button>
                 </form>
+                <p class="card-text">Id de usuário: {{ $frase->user_id }}</p>
+                <p class="card-text">Id do último editor: {{ $frase->edited_by_user_id ?? 'Ainda não editada' }}</p>
+                <p class="card-text">Pontuação: {{ $frase->pontuacao }}</p>
             </div>
         </div>
 

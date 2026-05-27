@@ -9,6 +9,7 @@
 				<div class="card-body">
 					<h5 class="card-title">{{ $frase->dia_semana }}</h5>
 					<p class="card-text">{{ $frase->texto }}</p>
+					<p class="card-text">Pontuação: {{ $frase->pontuacao }}</p>
 				</div>
 			</div>
 		@else

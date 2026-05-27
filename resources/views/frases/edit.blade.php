@@ -14,6 +14,10 @@
                 <label class="form-label">Texto</label>
                 <input class="form-control" type="text" name="texto" value="{{ $frase->texto }}">
             </div>
+            <div class="mb-3">
+                <label class="form-label">Pontuação</label>
+                <input class="form-control" type="number" name="pontuacao" value="{{ $frase->pontuacao }}" step="0.01">
+            </div>
             <button class="btn btn-primary" type="submit">Enviar</button>
             <a href="/frases/{{ $frase->id }}" class="btn btn-link">Voltar</a>
         </form>

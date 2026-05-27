@@ -19,7 +19,7 @@
             @forelse($frases as $frase)
                 <li class="list-group-item">
                     <a href="/frases/{{ $frase->id }}" class="text-decoration-none text-dark">
-                        <strong>{{ $frase->dia_semana }}</strong> — {{ $frase->texto }}
+                        <strong>{{ $frase->dia_semana }}</strong> — {{ $frase->texto }} <small>Pts: {{ $frase->pontuacao }}</small>
                     </a>
                 </li>
             @empty

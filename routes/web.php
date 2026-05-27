@@ -34,19 +34,23 @@ Route::delete('/livros/{livro}', [LivroController::class,'destroy']);
 
 //Frases CRUD
 # CREATE
-Route::get('/frases/create', [FraseController::class,'create']);
-Route::post('/frases', [FraseController::class,'store']);
+Route::middleware('auth')->group(function () {
+	Route::get('/frases/create', [FraseController::class,'create']);
+	Route::post('/frases', [FraseController::class,'store']);
+});
 
 # READ
 Route::get('/frases', [FraseController::class,'index']);
 Route::get('/frases/{frase}', [FraseController::class,'show']);
 
 # UPDATE
-Route::get('/frases/{frase}/edit', [FraseController::class,'edit']);
-Route::patch('/frases/{frase}', [FraseController::class,'update']);
+Route::middleware('auth')->group(function () {
+	Route::get('/frases/{frase}/edit', [FraseController::class,'edit']);
+	Route::patch('/frases/{frase}', [FraseController::class,'update']);
 
-# DELETE
-Route::delete('/frases/{frase}', [FraseController::class,'destroy']);
+	# DELETE
+	Route::delete('/frases/{frase}', [FraseController::class,'destroy']);
+});
 
 // Frase do dia (aleatória, por dia da semana)
 Route::get('/frasedodia', [FraseController::class, 'fraseDoDia']);

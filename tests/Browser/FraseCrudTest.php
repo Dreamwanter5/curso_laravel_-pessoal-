@@ -1,7 +1,9 @@
 <?php
 
 namespace Tests\Browser;
+use App\Models\User;
 use App\Models\Frase;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -12,10 +14,28 @@ class FraseCrudTest extends DuskTestCase
 
     public function test_crud_frases(): void
     {
-        $this->browse(function (Browser $browser) {
+        // Essa função cria um usuário para ser usado apenas nos testes, foi uma solução que vi através de IAs.
+        $user = User::factory()->create();
+        Permission::findOrCreate('admin', 'senhaunica');
+        Permission::findOrCreate('boss', 'senhaunica');
+        Permission::findOrCreate('manager', 'senhaunica');
+        Permission::findOrCreate('poweruser', 'senhaunica');
+        Permission::findOrCreate('user', 'senhaunica');
+
+        $this->browse(function (Browser $browser) use ($user) {
+            // $browser->visit('/frases/create')
+            //     ->assertUrlIs('http://auth.local:3141');
+
+            // Certifica que o usuário está logado para acessar ferramentas do CRUD.
+            $browser->loginAs($user)
+                ->visit('/frases/create')
+                ->pause(500) 
+                ->screenshot('frase-create-page') 
+                ->assertPathIs('/frases/create')
+                ->assertSee('Adicionar Frase');
+
             // Create
-            $browser->visit('/frases/create')
-                ->typeSlowly('dia_semana', 'Segunda-feira')
+            $browser->typeSlowly('dia_semana', 'Segunda-feira')
                 ->typeSlowly('texto', 'FRASE TESTE 1')
                 ->press('Enviar')
                 ->assertPathIs('/frases')

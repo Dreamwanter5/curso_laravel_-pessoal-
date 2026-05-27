@@ -55,14 +55,18 @@ class FraseController extends Controller
         ]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('frases.create');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $frase = new Frase;
         $frase->dia_semana = $request->dia_semana;
         $frase->texto = $request->texto;
+        $frase->pontuacao = $request->pontuacao;
+        $frase->user_id = $request->user()->id;
         $frase->save();
         return redirect('/frases');
     }
@@ -77,6 +81,8 @@ class FraseController extends Controller
     public function update(Request $request, Frase $frase){
         $frase->dia_semana = $request->dia_semana;
         $frase->texto = $request->texto;
+        $frase->pontuacao = $request->pontuacao;
+        $frase->edited_by_user_id = $request->user()->id;
         $frase->save();
         return redirect("/frases/{$frase->id}");
     }

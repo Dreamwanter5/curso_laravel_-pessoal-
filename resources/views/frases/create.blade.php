@@ -14,7 +14,11 @@
                 <label class="form-label">Texto</label>
                 <input class="form-control" type="text" name="texto" value="{{ old('texto') }}">
             </div>
-            <button class="btn btn-primary" type="submit" value="{{ old('texto') }}" >Enviar</button>
+            <div class="mb-3">
+                <label class="form-label">Pontuação</label>
+                <input class="form-control" type="number" name="pontuacao" value="{{ old('pontuacao') }}" step="0.01">
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar</button>
             <a href="/frases" class="btn btn-link">Cancelar</a>
         </form>
     </div>
