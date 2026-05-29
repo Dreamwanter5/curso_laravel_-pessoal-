@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Frase;
+use App\Http\Requests\FraseRequest;
 use Carbon\Carbon;
 
 class FraseController extends Controller
@@ -60,7 +61,7 @@ class FraseController extends Controller
         return view('frases.create');
     }
 
-    public function store(Request $request)
+    public function store(FraseRequest $request)
     {
         $frase = new Frase;
         $frase->dia_semana = $request->dia_semana;
@@ -78,7 +79,7 @@ class FraseController extends Controller
     }
 
     // Digitar Request $request é uma forma de dizer que Request é uma variável do láravel e $request é o nome da variável, e o Livro $livro é a variável do livro que eu quero atualizar.
-    public function update(Request $request, Frase $frase){
+    public function update(FraseRequest $request, Frase $frase){
         $frase->dia_semana = $request->dia_semana;
         $frase->texto = $request->texto;
         $frase->pontuacao = $request->pontuacao;
