@@ -30,7 +30,7 @@ class FraseController extends Controller
     public function fraseDoDia()
     {
         $num = now()->dayOfWeekIso;
-    // O carbon como biblioteca existente dentro do sistema para manipulação de dados foi utilizado para pegar o dia da semana atual em extenso, por isso o uso de isoFormat('dddd'). Ucfirst serve para deixar a primeira letra maiúscula.
+        // O carbon como biblioteca existente dentro do sistema para manipulação de dados foi utilizado para pegar o dia da semana atual em extenso, por isso o uso de isoFormat('dddd'). Ucfirst serve para deixar a primeira letra maiúscula.
         $diaSemana = ucfirst(Carbon::now()->isoFormat('dddd'));
 
         $frase = null;
@@ -48,7 +48,6 @@ class FraseController extends Controller
             'dia' => $diaSemana,
         ]);
     }
-//
     public function show(Frase $frase)
     {
         return view('frases.show', [
