@@ -37,6 +37,7 @@ class FraseCrudTest extends DuskTestCase
             // Create
             $browser->typeSlowly('dia_semana', 'Segunda-feira')
                 ->typeSlowly('texto', 'FRASE TESTE 1')
+                ->typeSlowly('pontuacao', '8.5')
                 ->press('Enviar')
                 ->assertPathIs('/frases')
                 ->assertSee('Segunda-feira')
@@ -53,6 +54,7 @@ class FraseCrudTest extends DuskTestCase
             $browser->visit("/frases/{$frase->id}/edit")
                 ->typeSlowly('dia_semana', 'Terça-feira')
                 ->typeSlowly('texto', 'FRASE TESTE 2')
+                ->typeSlowly('pontuacao', '9.0')
                 ->press('Enviar')
                 ->assertPathIs("/frases/{$frase->id}")
                 ->assertSee('Terça-feira')
